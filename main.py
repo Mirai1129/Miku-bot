@@ -18,5 +18,17 @@ async def on_ready():
                                     name="哈囉阿~")
     await bot.change_presence(status=status_w, activity=activity_w)
 
+@bot.event
+async def on_member_join(member):
+  print(f'{member}加入了')
+  channel = bot.get_channel(479169635015458817)
+  await channel.send(f'{member.mention} 加入了')
+
+@bot.event
+async def on_member_remove(member):
+  print(f'{member}離開了')
+  channel = bot.get_channel(479170776851808256)
+  await channel.send(f'**{member}** 離開了')
+
 load_dotenv()
 bot.run(os.getenv('TOKEN'))

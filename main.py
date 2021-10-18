@@ -18,17 +18,26 @@ async def on_ready():
                                     name="哈囉阿~")
     await bot.change_presence(status=status_w, activity=activity_w)
 
+#member join 訊息
 @bot.event
 async def on_member_join(member):
   print(f'{member}加入了')
   channel = bot.get_channel(479169635015458817)
   await channel.send(f'{member.mention} 加入了')
 
+#member left 訊息
 @bot.event
 async def on_member_remove(member):
   print(f'{member}離開了')
   channel = bot.get_channel(479170776851808256)
   await channel.send(f'**{member}** 離開了')
+
+#ping指令 ctx = content
+@bot.command()
+async def ping(ctx):
+  await ctx.send(f'{round(bot.latency * 1000)} 毫秒') 
+# bot.latency 機器人延遲時間 預設時間為s
+# round 小數點四捨五入
 
 load_dotenv()
 bot.run(os.getenv('TOKEN'))

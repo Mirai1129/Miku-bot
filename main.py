@@ -1,5 +1,7 @@
 import discord
 from discord.ext import commands
+import os
+from dotenv import load_dotenv
 
 intents = discord.Intents.all()
 
@@ -13,7 +15,8 @@ async def on_ready():
     status_w = discord.Status.online
     #playing（遊玩中）、streaming（直撥中）、listening（聆聽中）、watching（觀看中）、custom（自定義）
     activity_w = discord.Activity(type=discord.ActivityType.watching,
-                                    name="just test")
+                                    name="哈囉阿~")
     await bot.change_presence(status=status_w, activity=activity_w)
 
-bot.run('Nzg2NTc2MDc0OTUxMDk4NDA5.X9IaDg.nu7ErlXx3WNFonJg0y_DmT8we1o')
+load_dotenv()
+bot.run(os.getenv('TOKEN'))

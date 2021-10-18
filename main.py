@@ -2,6 +2,11 @@ import discord
 from discord.ext import commands
 import os
 from dotenv import load_dotenv
+import json
+
+# 宣告 jfile
+with open('setting.json', 'r', encoding = 'utf8') as jfile:
+  jdata = json.load(jfile)
 
 intents = discord.Intents.all()
 
@@ -39,5 +44,4 @@ async def ping(ctx):
 # bot.latency 機器人延遲時間 預設時間為s
 # round 小數點四捨五入
 
-load_dotenv()
-bot.run(os.getenv('TOKEN'))
+bot.run(jdata['TOKEN'])

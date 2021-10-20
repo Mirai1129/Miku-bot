@@ -1,7 +1,12 @@
 import discord
 from discord.ext import commands
+from core.classes import Cog_Extension
+import json
 import os
-from dotenv import load_dotenv
+
+# 宣告 jfile
+with open('setting.json', 'r', encoding = 'utf8') as jfile:
+  jdata = json.load(jfile)
 
 intents = discord.Intents.all()
 
@@ -22,22 +27,21 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
   print(f'{member}加入了')
-  channel = bot.get_channel(479169635015458817)
+  channel = bot.get_channel(int(jdata['Welcome_channel'])) 
+  # json傳回資料為str 轉換為int
   await channel.send(f'{member.mention} 加入了')
 
 #member left 訊息
 @bot.event
 async def on_member_remove(member):
   print(f'{member}離開了')
-  channel = bot.get_channel(479170776851808256)
+  channel = bot.get_channel(int(jdata['Leave_channel']))
   await channel.send(f'**{member}** 離開了')
 
-#ping指令 ctx = content
-@bot.command()
-async def ping(ctx):
-  await ctx.send(f'{round(bot.latency * 1000)} 毫秒') 
-# bot.latency 機器人延遲時間 預設時間為s
-# round 小數點四捨五入
+for filename in os.listdir('./cmds'):
+  if filename.endswith('.py'):
+    bot.load_extension(f'cmds.{filename[:-3]}')
 
-load_dotenv()
-bot.run(os.getenv('TOKEN'))
+
+if __name__ == "__main__":
+  bot.run(jdata['TOKEN'])

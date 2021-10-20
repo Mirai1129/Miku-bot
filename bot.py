@@ -1,8 +1,8 @@
 import discord
 from discord.ext import commands
-import os
-from dotenv import load_dotenv
+from core.classes import Cog_Extension
 import json
+import os
 
 # 宣告 jfile
 with open('setting.json', 'r', encoding = 'utf8') as jfile:
@@ -38,11 +38,10 @@ async def on_member_remove(member):
   channel = bot.get_channel(int(jdata['Leave_channel']))
   await channel.send(f'**{member}** 離開了')
 
-#ping指令 ctx = content
-@bot.command()
-async def ping(ctx):
-  await ctx.send(f'{round(bot.latency * 1000)} 毫秒') 
-# bot.latency 機器人延遲時間 預設時間為s
-# round 小數點四捨五入
+for filename in os.listdir('./cmds'):
+  if filename.endswith('.py'):
+    bot.load_extension(f'cmds.{filename[:-3]}')
 
-bot.run(jdata['TOKEN'])
+
+if __name__ == "__main__":
+  bot.run(jdata['TOKEN'])

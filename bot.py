@@ -23,20 +23,21 @@ async def on_ready():
                                     name="哈囉阿~")
     await bot.change_presence(status=status_w, activity=activity_w)
 
-#member join 訊息
-@bot.event
-async def on_member_join(member):
-  print(f'{member}加入了')
-  channel = bot.get_channel(int(jdata['Welcome_channel'])) 
-  # json傳回資料為str 轉換為int
-  await channel.send(f'{member.mention} 加入了')
 
-#member left 訊息
-@bot.event
-async def on_member_remove(member):
-  print(f'{member}離開了')
-  channel = bot.get_channel(int(jdata['Leave_channel']))
-  await channel.send(f'**{member}** 離開了')
+@bot.command()
+async def load(ctx, extension):
+  bot.load.extension(f'cmds.{extension}')
+  await ctx.send(f'Loaded {extension} done.')
+
+@bot.command()
+async def unload(ctx, extension):
+  bot.unload.extension(f'cmds.{extension}')
+  await ctx.send(f'Un-Loaded {extension} done.')
+
+@bot.command()
+async def reload(ctx, extension):
+  bot.reload.extension(f'cmds.{extension}')
+  await ctx.send(f'Re-Loaded {extension} done.')
 
 for filename in os.listdir('./cmds'):
   if filename.endswith('.py'):

@@ -10,7 +10,7 @@ with open('setting.json', 'r', encoding = 'utf8') as jfile:
 class Event(Cog_Extension):
   
   #member join 訊息
-  @commands.Cog.listner()  
+  @commands.Cog.listener()  
   async def on_member_join(self, member):
     print(f'{member}加入了')
     channel = self.bot.get_channel(int(jdata['Welcome_channel'])) 
@@ -18,14 +18,14 @@ class Event(Cog_Extension):
     await channel.send(f'{member.mention} 加入了')
 
   #member left 訊息
-  @commands.Cog.listner()  
+  @commands.Cog.listener()  
   async def on_member_remove(self, member):
     print(f'{member}離開了')
     channel = self.bot.get_channel(int(jdata['Leave_channel']))
     await channel.send(f'**{member}** 離開了')
  
   #訊息內容
-  @commands.Cog.listner()
+  @commands.Cog.listener()
   async def on_message(self, msg):
     if msg.content == 'apple':
       await msg.channel.send('hi')

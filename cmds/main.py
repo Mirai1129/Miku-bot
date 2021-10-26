@@ -45,6 +45,10 @@ class Main(Cog_Extension):
     async def clear(self, ctx, num: int):
         await ctx.channel.purge(limit=(num + 1))
 
+    @commands.command()
+    async def emoji(self, ctx, msg):
+        await ctx.message.add_reaction(msg)
+
 
 def setup(bot):
     bot.add_cog(Main(bot))

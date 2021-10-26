@@ -1,5 +1,6 @@
 {
   "TOKEN": "裡面放token",
   "Welcome_channel": "裡面放歡迎訊息頻道id",
-  "Leave_channel": "裡面放離開訊息頻道id"
+  "Leave_channel": "裡面放離開訊息頻道id",
+  "Ready_channel": "裡面放機器人上線訊息頻道id"
 }

@@ -15,7 +15,7 @@ bot = commands.Bot(command_prefix='>', intents=intents)
 
 @bot.event
 async def on_ready():
-    print('Bot 上線拉')
+    print(f'{bot.user} 上線拉')
 
     #online（上線）,offline（下線),idle（閒置）,dnd（請勿打擾）,invisible（隱身）
     status_w = discord.Status.online

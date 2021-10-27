@@ -1,7 +1,8 @@
 import discord
 from discord.ext import commands
 from core.classes import Cog_Extension  # 從core資料夾 import Cog_Extension這個class
-import json, asyncio, datetime
+import json
+import datetime
 import asyncio
 import time
 import math
@@ -30,6 +31,14 @@ class Task(Cog_Extension):
     async def set_ready_channel(self, ctx, ch: int):  # ch = channel
         self.channel = self.bot.get_channel(int(jdata['Ready_channel']))
         await ctx.send(f'頻道設置為: {self.channel.mention}')
+
+    @commands.command()
+    async def set_time(self, ctx, time):
+        with open('setting.json', 'r', encoding='utf8') as jfile:
+            jdata = json.load(jfile)
+        jdata['time'] = time
+        with open('setting.json', 'w', encoding='utf8') as jfile:
+            json.dump(jdata, jfile, indent=4)
 
 
 def setup(bot):

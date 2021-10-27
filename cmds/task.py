@@ -20,7 +20,7 @@ class Task(Cog_Extension):
             self.channel = self.bot.get_channel(int(jdata['Ready_channel']))
             while not self.bot.is_closed():  # 如果我們機器人沒有關閉的話
                 await self.channel.send(
-                    f'我在<t:{(math.floor(time.time()))}>的時候上線了')
+                    f'我在<t:{int(time.time())}:F>的時候上線了')
                 # https://discord.com/developers/docs/reference#message-formatting-timestamp-styles
                 await asyncio.sleep(3000)  # 單位: 秒
 

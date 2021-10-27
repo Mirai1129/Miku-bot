@@ -8,6 +8,7 @@ authors = ["minecraftmiku83 <<>>"]
 python = "^3.8"
 discord = "^1.7.3"
 python-dotenv = "^0.19.1"
+classes = "^0.4.0"
 
 [tool.poetry.dev-dependencies]
 

@@ -31,6 +31,7 @@ class Event(Cog_Extension):
         words = ['apple', 'banana', 'abc']  #要回應的關鍵字
         if msg.content in words and msg.author != self.bot.user:
             await msg.channel.send('hi')
+            print(msg)
 
 
 def setup(bot):

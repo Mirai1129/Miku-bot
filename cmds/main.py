@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from core.classes import Cog_Extension  # 從core資料夾 import Cog_Extension這個class
 import json
+import time
 import datetime
 
 # 宣告 jfile
@@ -24,21 +25,25 @@ class Main(Cog_Extension):
 
     # 崁入訊息
     @commands.command()
-    async def em(self, ctx):
+    async def em(self, ctx, des, auth):
         embed = discord.Embed(title="this is a title",
-                              description="this is a description",
+                              description=des,
                               color=0x488fdb,
                               timestamp=datetime.datetime.now())
-        embed.set_author(name="im a authoe")
+        embed.set_author(name=auth)
         embed.add_field(name="hi", value="value", inline=True)
         embed.set_footer(text="good morning")
-        await ctx.send(embed=embed)
+        await ctx.send(embed=embed) 
 
     # 重複使用者說的話
     @commands.command()
     async def sayrepeat(self, ctx, *, msg):
+        embed = discord.Embed(description=msg,
+                              color=0x488fdb,
+                              timestamp=datetime.datetime.now())
+        embed.set_author(name=ctx.author)
         await ctx.message.delete()
-        await ctx.send(msg)
+        await ctx.send(embed=embed)
 
     # 清理訊息
     @commands.command()
@@ -48,6 +53,14 @@ class Main(Cog_Extension):
     @commands.command()
     async def emoji(self, ctx, msg):
         await ctx.message.add_reaction(msg)
+
+    @commands.command()
+    async def nowtime(self, ctx):
+        await ctx.send(f'現在時間是: <t:{int(time.time())}:F>')
+
+    #@commands.command()
+    #async def help(self, ctx):
+     #   await ctx.send('hi')
 
 
 def setup(bot):

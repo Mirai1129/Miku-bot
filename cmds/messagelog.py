@@ -17,7 +17,7 @@ class Messagelog(Cog_Extension):
     async def on_message(self, ctx):
         channel_id = ctx.channel.id
         message_id = ctx.id
-        self.channel = self.bot.get_channel(int(jdata['messagelog_channel']))
+        self.channel = self.bot.get_channel(int(jdata['Messagelog_channel']))
         if ctx.author != self.bot.user:
             #with open('message.json', 'w', encoding='utf-8') as f:
             #json.dump(messagelog, f)
@@ -38,7 +38,7 @@ class Messagelog(Cog_Extension):
 
     @commands.Cog.listener()
     async def on_message_edit(self, before, after):
-        self.channel = self.bot.get_channel(int(jdata['messagelog_channel']))
+        self.channel = self.bot.get_channel(int(jdata['Messagelog_channel']))
         if before.author != self.bot.user:
             if before.content != after.content:
                 embed = discord.Embed(title="有人編輯訊息",
@@ -58,7 +58,7 @@ class Messagelog(Cog_Extension):
 
     @commands.Cog.listener()
     async def on_message_delete(self, message):
-        self.channel = self.bot.get_channel(int(jdata['messagelog_channel']))
+        self.channel = self.bot.get_channel(int(jdata['Messagelog_channel']))
         if message.author != self.bot.user:
             embed = discord.Embed(title="有人刪除訊息",
                                       description=message.content,

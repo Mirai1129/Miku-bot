@@ -1,3 +1,4 @@
+from encodings import CodecRegistryError
 import discord
 from discord.ext import commands
 from core.classes import Cog_Extension
@@ -12,6 +13,9 @@ intents = discord.Intents.all()
 
 bot = commands.Bot(command_prefix='>', intents=intents)
 
+for filename in os.listdir('./cmds'):
+    if filename.endswith('.py'):
+        bot.load_extension(f'cmds.{filename[:-3]}')
 
 @bot.event
 async def on_ready():
@@ -41,11 +45,6 @@ async def unload(ctx, extension):
 async def reload(ctx, extension):
     bot.reload.extension(f'cmds.{extension}')
     await ctx.send(f'Re-Loaded {extension} done.')
-
-
-for filename in os.listdir('./cmds'):
-    if filename.endswith('.py'):
-        bot.load_extension(f'cmds.{filename[:-3]}')
 
 if __name__ == "__main__":
     bot.run(jdata['TOKEN'])

@@ -18,7 +18,7 @@ class Messagelog(Cog_Extension):
         channel_id = ctx.channel.id
         message_id = ctx.id
         self.channel = self.bot.get_channel(int(jdata['Messagelog_channel']))
-        if ctx.author != self.bot.user:
+        if ctx.author != self.bot.user and ctx.author.bot != True:
             #with open('message.json', 'w', encoding='utf-8') as f:
             #json.dump(messagelog, f)
             embed = discord.Embed(title="有人建立訊息",
@@ -41,20 +41,21 @@ class Messagelog(Cog_Extension):
         self.channel = self.bot.get_channel(int(jdata['Messagelog_channel']))
         if before.author != self.bot.user:
             if before.content != after.content:
-                embed = discord.Embed(title="有人編輯訊息",
-                                      description="%s --> %s" % (before.content, after.content),
-                                      color=0xf28f00,
-                                      timestamp=datetime.datetime.utcnow())
-                #embed.description("這是訊息")
-                embed.add_field(name="頻道", value=before.channel, inline=True)
-                embed.add_field(name="頻道Id", value=before.channel.id, inline=True)
-                embed.add_field(name="訊息Id", value=before.id, inline=False)
-                embed.set_author(name=before.author,
-                                 icon_url=before.author.avatar_url,
-                                 url=before.author.avatar_url)
-                embed.set_thumbnail(url=before.author.avatar_url)
-                embed.set_footer(text="用戶Id: %s" % before.id)
-                await self.channel.send(embed=embed)
+                if before.author.bot != True:
+                    embed = discord.Embed(title="有人編輯訊息",
+                                        description="%s --> %s" % (before.content, after.content),
+                                        color=0xf28f00,
+                                        timestamp=datetime.datetime.utcnow())
+                    #embed.description("這是訊息")
+                    embed.add_field(name="頻道", value=before.channel, inline=True)
+                    embed.add_field(name="頻道Id", value=before.channel.id, inline=True)
+                    embed.add_field(name="訊息Id", value=before.id, inline=False)
+                    embed.set_author(name=before.author,
+                                    icon_url=before.author.avatar_url,
+                                    url=before.author.avatar_url)
+                    embed.set_thumbnail(url=before.author.avatar_url)
+                    embed.set_footer(text="用戶Id: %s" % before.id)
+                    await self.channel.send(embed=embed)
 
     @commands.Cog.listener()
     async def on_message_delete(self, message):

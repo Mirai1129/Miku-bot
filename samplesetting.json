@@ -4,5 +4,6 @@
   "Leave_channel": "裡面放離開訊息頻道id",
   "Ready_channel": "裡面放機器人上線訊息頻道id",
   "Messagelog_channel": "裡面放機器人傳送訊息log頻道id",
+  "Guild_id": 這邊直接放guild_id,
   "bad_words": []
 }

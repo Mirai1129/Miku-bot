@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 from core.classes import Cog_Extension  # 從core資料夾 import Cog_Extension這個class
 import json
 

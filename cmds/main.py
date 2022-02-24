@@ -1,5 +1,5 @@
-import discord
-from discord.ext import commands
+import nextcord
+from nextcord.ext import commands
 from core.classes import Cog_Extension  # 從core資料夾 import Cog_Extension這個class
 import json
 import time
@@ -15,7 +15,7 @@ class Main(Cog_Extension):
     #ping指令 ctx = content
     @commands.command()
     async def ping(self, ctx):  # class底下的 def()前面要加arguement
-        embed = discord.Embed(title='延遲時間(ms)',
+        embed = nextcord.Embed(title='延遲時間(ms)',
                               description=f'{round(self.bot.latency*1000)} 毫秒',
                               color=0xb12091)
         await ctx.send(embed=embed)
@@ -26,7 +26,7 @@ class Main(Cog_Extension):
     # 崁入訊息
     @commands.command()
     async def em(self, ctx, des, auth):
-        embed = discord.Embed(title="this is a title",
+        embed = nextcord.Embed(title="this is a title",
                               description=des,
                               color=0x488fdb,
                               timestamp=datetime.datetime.now())
@@ -38,7 +38,7 @@ class Main(Cog_Extension):
     # 重複使用者說的話
     @commands.command()
     async def sayrepeat(self, ctx, *, msg):
-        embed = discord.Embed(description=msg,
+        embed = nextcord.Embed(description=msg,
                               color=0x488fdb,
                               timestamp=datetime.datetime.now())
         embed.set_author(name=ctx.author)
